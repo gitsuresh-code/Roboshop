@@ -1,8 +1,8 @@
 #!/bin/bash
 
 ami="ami-09c813fb71547fc4f"
-sg="sg-07c8acf3fa6b923fa" # replace with your SG ID
-zone="Z0948150OFPSYTNVYZOY" # replace with your ID
+sg="sg-0bdcda12513912f85" # replace with your SG ID
+zone="use1-az4" # replace with your ID
 dns="sureshdevops.fun"
 
 for instance in $@ # mongodb redis mysql
