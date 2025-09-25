@@ -43,7 +43,7 @@ systemctl start mongod &>>$log
 validate $? "MongoDB start"
 
 sed -i 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf &>>$log
-validate $? "Updating conf file"
+validate $? "Updating Config file"
 
 systemctl restart mongod &>>$log
 validate $? "restarting service"

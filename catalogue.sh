@@ -1,0 +1,80 @@
+#!/bin/bash
+
+R="\e[31m"
+G="\e[32m"
+Y="\e[32m"
+N="\e[0m"
+user=$(id -u)
+file="/var/log/roboshoplog/"
+name=$(echo $0 | cut -d "." -f1)
+log=$file/$name.log
+
+mkdir -p $file
+
+cp ./catalogue.service /etc/systemd/system/catalogue.service
+
+
+if [ $user -ne 0 ];then
+    {
+        echo -e "$R Please take root permission $N" | tee -a $log
+        exit 1
+    }         
+fi
+
+validate()
+{
+    if [ $? -ne 0 ];then
+        echo -e "$2 $R is FAILURE $N" | tee -a $log 
+        else
+        echo -e "$2 $G is SUCCESS $N" | tee -a $log
+    fi 
+}
+
+dnf module disable nodejs -y &>>$log
+validate $? "Disabling default nodejs"
+
+dnf module enable nodejs:20 -y &>>$log
+validate $? "Enabling nodejs 20 version"
+
+dnf install nodejs -y &>>$log
+validate $? "Installing nodejs"
+
+useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$log
+validate $? "Adding Application user"
+
+mkdir /app &>>$log
+validate $? "Creating App directory"
+
+curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip &>>$log
+validate $? "Dowloading backend files"
+
+cd /app
+validate $? "Switching to app directory"
+
+unzip /tmp/catalogue.zip &>>$log
+validate $? "Unzipping the app files"
+
+npm install &>>$log
+validate $? "installing dependency packages"
+
+cp ./catalogue.service /etc/systemd/system/catalogue.service
+
+systemctl daemon reload &>>$log
+validate $? "Reloading Catalogue service"
+
+systemctl enable catalogue &>>$log
+validate $? "Enabling Catalogue service"
+
+
+systemctl start catalogue &>>$log
+validate $? "Starting Catalogue service"
+
+cp ./mongo.repo /etc/yum.repos.d/mongo.repo
+
+dnf install mongodb-mongosh -y
+validate $? "Installing mongo client"
+
+mongosh --host mongo.sureshdevops.fun </app/db/master-data.js
+validate $? "Loading DB Schema"
+
+
