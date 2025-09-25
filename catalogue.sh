@@ -54,6 +54,7 @@ validate $? "Switching to app directory"
 unzip /tmp/catalogue.zip &>>$log
 validate $? "Unzipping the app files"
 
+
 npm install &>>$log
 validate $? "installing dependency packages"
 
@@ -69,10 +70,11 @@ validate $? "Enabling Catalogue service"
 systemctl start catalogue &>>$log
 validate $? "Starting Catalogue service"
 
-
+cp ./mongo.repo /etc/yum.repos.d/mongo.repo
 
 dnf install mongodb-mongosh -y
 validate $? "Installing mongo client"
+
 
 mongosh --host mongo.sureshdevops.fun </app/db/master-data.js
 validate $? "Loading DB Schema"
