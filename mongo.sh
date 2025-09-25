@@ -42,7 +42,7 @@ validate $? "MongoDB Enabling"
 systemctl start mongod &>>$log
 validate $? "MongoDB start"
 
-sed -i 's/127.0.0.1/0.0.0.0' /etc/mongod.conf &>>$log
+sed -i 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf &>>$log
 validate $? "Updating conf file"
 
 systemctl restart mongod &>>$log
