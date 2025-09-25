@@ -7,7 +7,7 @@ Y="\e[33m"
 N="\e[0m"
 
 LOGS_FOLDER="/var/log/shell-script" #/var/log/shell-script/
-SCRIPT_NAME=$( echo $0 | cut -d "." -f1 ) #20_logs
+SCRIPT_NAME=$( echo $0 | cut -d "." -f1 ) #filename
 LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME.log" # /var/log/shell-script/20_logs.log
 
 mkdir -p $LOGS_FOLDER
@@ -19,7 +19,7 @@ if [ $USERID -ne 0 ]; then
 fi
 
 VALIDATE(){ # functions receive inputs through args just like shell script args
-    if [ $1 -ne 0 ]; then
+    if [ $? -ne 0 ]; then
         echo -e "$2 Installation  ... $R FAILURE $N" | tee -a $LOG_FILE
         exit 1
     else
