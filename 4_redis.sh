@@ -31,13 +31,13 @@ validate()
 dnf list installed redis &>>$log
 validate $? "Redis Available"
 
-dnf module disable redis -y
+dnf module disable redis -y &>>$log
 validate $? "disabling default version"
 
-dnf module enable redis:7 -y
+dnf module enable redis:7 -y &>>$log
 validate $? "enabling version"
 
-systemctl install redis &>>$log
+dnf install redis -y &>>$log
 validate $? "Redis Available"
 
 
