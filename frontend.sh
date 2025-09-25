@@ -46,7 +46,7 @@ validate $? "Enabling NGINX"
 systemctl start nginx &>>$log
 validate $? "Starting NGINX"
 
-cd /usr/share/nginx/html/*
+cd /usr/share/nginx/html/
 validate $? "Switching to NGINX HTML Directory"
 
 rm -rf *
