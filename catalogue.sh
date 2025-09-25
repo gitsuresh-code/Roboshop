@@ -13,6 +13,7 @@ echo -e "Script $G started executing $N now: $date"
 start_time=$(date +%s)
 mkdir -p $file
 
+cp ./catalogue.service /etc/systemd/system/
 
 if [ $user -ne 0 ];then
     {
@@ -60,7 +61,7 @@ validate $? "Unzipping the app files"
 npm install &>>$log
 validate $? "installing dependency packages"
 
-cp ./catalogue.service /etc/systemd/system/
+
 
 systemctl daemon reload &>>$log
 validate $? "Reloading Catalogue service"
