@@ -19,7 +19,7 @@ if [ $USERID -ne 0 ]; then
 fi
 
 VALIDATE(){ # functions receive inputs through args just like shell script args
-    if [ $? -ne 0 ]; then
+    if [ $1 -ne 0 ]; then
         echo -e "$2 Installation  ... $R FAILURE $N" | tee -a $LOG_FILE
         exit 1
     else
