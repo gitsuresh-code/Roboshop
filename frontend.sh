@@ -55,11 +55,12 @@ validate $? "Delete default NGINX files"
 curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip
 validate $? "Downloading front files to temp"
 
-curl unzip /tmp/frontend.zip .
+unzip /tmp/frontend.zip .
 validate $? "Unzipping files to NGINX directory"
 
 touch /etc/nginx/nginx.conf
-cp ./nginx.conf /etc/nginx/nginx.conf
+
+cp /root/Roboshop/nginx.conf /etc/nginx/nginx.conf
 validate $? "Updating nginx config file"
 
 systemctl restart nginx
