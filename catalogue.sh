@@ -42,8 +42,10 @@ validate $? "Installing nodejs"
 useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$log
 validate $? "Adding Application user"
 
+
 mkdir /app &>>$log
 validate $? "Creating App directory"
+
 
 curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip &>>$log
 validate $? "Dowloading backend files"
@@ -70,6 +72,7 @@ validate $? "Enabling Catalogue service"
 systemctl start catalogue &>>$log
 validate $? "Starting Catalogue service"
 
+vim /etc/yum.repos.d/mongo.repo
 cp ./mongo.repo /etc/yum.repos.d/mongo.repo
 
 dnf install mongodb-mongosh -y
