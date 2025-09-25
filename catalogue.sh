@@ -58,7 +58,7 @@ validate $? "Unzipping the app files"
 npm install &>>$log
 validate $? "installing dependency packages"
 
-cp ./catalogue.service /etc/systemd/system/catalogue.service
+cp ./catalogue.service /etc/systemd/system/
 
 systemctl daemon reload &>>$log
 validate $? "Reloading Catalogue service"
