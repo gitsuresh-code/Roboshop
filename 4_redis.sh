@@ -37,6 +37,9 @@ validate $? "disabling default version"
 dnf module enable redis:7 -y
 validate $? "enabling version"
 
+systemctl install redis &>>$log
+validate $? "Redis Available"
+
 
 systemctl enable redis &>>$log
 validate $? "Redis Enabling"
