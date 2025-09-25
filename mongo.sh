@@ -26,7 +26,7 @@ validate()
     if [ $? -ne 0 ];then
         echo -e "$2 $R is FAILURE $N"
         else
-        echo -e "$2 $R is SUCCESS $N"
+        echo -e "$2 $G is SUCCESS $N"
     fi 
 }
 
