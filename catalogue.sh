@@ -9,6 +9,8 @@ file="/var/log/roboshoplog/"
 name=$(echo $0 | cut -d "." -f1)
 log=$file/$name.log
 
+echo -e "Script $G started executing $N now: $date"
+start_time=$(date +%s)
 mkdir -p $file
 
 cp ./catalogue.service /etc/systemd/system/catalogue.service
@@ -76,5 +78,7 @@ validate $? "Installing mongo client"
 
 mongosh --host mongo.sureshdevops.fun </app/db/master-data.js
 validate $? "Loading DB Schema"
+end_time=$(date +%s)
+total_time=$($end_time-$start_time)
 
-
+echo -p "Script executed in $total_time"
