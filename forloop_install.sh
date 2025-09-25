@@ -12,7 +12,7 @@ LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME.log" # /var/log/shell-script/20_logs.log
 
 mkdir -p $LOGS_FOLDER
 echo "Script started executed at: $(date)" | tee -a $LOG_FILE
-
+start_time=$(date +%s)
 if [ $USERID -ne 0 ]; then
     echo "ERROR:: Please run this script with root privelege"
     exit 1 # Programm will end here 
@@ -36,8 +36,12 @@ if [ $? -ne 0 ]; then
 else
     echo -e "$package already exist ... $Y SKIPPING $N" | tee -a $LOG_FILE
 fi
-
 }
+
+end_time=$(date +%s)
+total_time=$($end_time-$start_time)
+echo "Total script execution time:$total_time"
+
 
 
 
