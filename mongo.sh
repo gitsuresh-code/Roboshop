@@ -1,9 +1,9 @@
 #!/bin/bash
 
-R="/e[31m"
-G="/e[32m"
-Y="/e[32m"
-N="/e[0m"
+R="\e[31m"
+G="\e[32m"
+Y="\e[32m"
+N="\e[0m"
 user=$(id -u)
 file="/var/log/roboshoplog/"
 name=$(echo $0 | cut -d "." -f1)
@@ -11,7 +11,7 @@ log=$file/$name.log
 
 mkdir -p $file
 
-cp ./mongo.repo /etc/yum.repos.d/ 
+cp ./mongo.repo /etc/yum.repos.d/mongo.repo
 
 
 if [ $user -ne 0 ];then
