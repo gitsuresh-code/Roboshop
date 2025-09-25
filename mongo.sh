@@ -26,26 +26,26 @@ validate()
     if [ $? -ne 0 ];then
         echo -e "$2 $R is FAILURE $N"
         else
-        echo "$2 $R is SUCCESS $N"
+        echo -e "$2 $R is SUCCESS $N"
     fi 
 }
 
 dnf list installed &>>$log
 validate $? "MogoDB Available Check"
 
-dnf install mongodb-org -y
+dnf install mongodb-org -y &>>$log
 validate $? "MongoDB installation"
 
-systemctl enable mongod
+systemctl enable mongod &>>$log
 validate $? "MongoDB Enabling"
 
-systemctl start mongod
+systemctl start mongod &>>$log
 validate $? "MongoDB start"
 
-sed -i "s/127.0.0.1/0.0.0.0" /etc/mongod.conf
+sed -i "s/127.0.0.1/0.0.0.0" /etc/mongod.conf &>>$log
 validate $? "Updating conf file"
 
-systemctl restart mongod
+systemctl restart mongod &>>$log
 validate $? "restarting service"
 
 
