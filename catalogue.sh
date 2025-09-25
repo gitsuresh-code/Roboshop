@@ -13,8 +13,6 @@ echo -e "Script $G started executing $N now: $date"
 start_time=$(date +%s)
 mkdir -p $file
 
-cp ./catalogue.service /etc/systemd/system/catalogue.service
-
 
 if [ $user -ne 0 ];then
     {
@@ -71,14 +69,15 @@ validate $? "Enabling Catalogue service"
 systemctl start catalogue &>>$log
 validate $? "Starting Catalogue service"
 
-cp ./mongo.repo /etc/yum.repos.d/mongo.repo
+
 
 dnf install mongodb-mongosh -y
 validate $? "Installing mongo client"
 
 mongosh --host mongo.sureshdevops.fun </app/db/master-data.js
 validate $? "Loading DB Schema"
+
 end_time=$(date +%s)
-total_time=$($end_time-$start_time)
+total_time=$(($end_time-$start_time))
 
 echo -p "Script executed in $total_time"
