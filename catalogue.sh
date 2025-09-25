@@ -72,7 +72,7 @@ validate $? "Enabling Catalogue service"
 systemctl start catalogue &>>$log
 validate $? "Starting Catalogue service"
 
-vim /etc/yum.repos.d/mongo.repo
+touch /etc/yum.repos.d/mongo.repo
 cp ./mongo.repo /etc/yum.repos.d/mongo.repo
 
 dnf install mongodb-mongosh -y
