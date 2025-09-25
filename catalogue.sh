@@ -14,6 +14,7 @@ start_time=$(date +%s)
 mkdir -p $file
 
 cp ./catalogue.service /etc/systemd/system/
+cp ./mongo.repo /etc/yum.repos.d/mongo.repo
 
 if [ $user -ne 0 ];then
     {
@@ -73,8 +74,7 @@ validate $? "Enabling Catalogue service"
 systemctl start catalogue &>>$log
 validate $? "Starting Catalogue service"
 
-touch /etc/yum.repos.d/mongo.repo
-cp ./mongo.repo /etc/yum.repos.d/mongo.repo
+
 
 dnf install mongodb-mongosh -y
 validate $? "Installing mongo client"
