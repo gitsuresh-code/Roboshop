@@ -2,7 +2,7 @@
 
 ami="ami-09c813fb71547fc4f"
 sg="sg-0bdcda12513912f85" # replace with your SG ID
-zone="use1-az4" # replace with your ID
+hostedzone="Z04272802545XSOGBRNOM" # replace with your ID
 dns="sureshdevops.fun"
 
 for instance in $@ # mongodb redis mysql
@@ -21,7 +21,7 @@ do
     echo "$instance: $IP"
 
     aws route53 change-resource-record-sets \
-    --hosted-zone-id $zone \
+    --hosted-zone-id $hostedzone \
     --change-batch '
     {
         "Comment": "Updating record set"
