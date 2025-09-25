@@ -46,24 +46,24 @@ validate $? "Enabling NGINX"
 systemctl start nginx &>>$log
 validate $? "Starting NGINX"
 
-cd /usr/share/nginx/html/
+cd /usr/share/nginx/html/ &>>$log
 validate $? "Switching to NGINX HTML Directory"
 
-rm -rf *
+rm -rf * &>>$log
 validate $? "Delete default NGINX files"
 
-curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip
+curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip &>>$log
 validate $? "Downloading front files to temp"
 
-unzip /tmp/frontend.zip .
+unzip /tmp/frontend.zip . &>>$log
 validate $? "Unzipping files to NGINX directory"
 
 touch /etc/nginx/nginx.conf
 
-cp /root/Roboshop/nginx.conf /etc/nginx/nginx.conf
+cp /root/Roboshop/nginx.conf /etc/nginx/nginx.conf &>>$log
 validate $? "Updating nginx config file"
 
-systemctl restart nginx
+systemctl restart nginx &>>$log
 validate $? "Restarting nginx server"
 
 end_time=$(date +%s)
