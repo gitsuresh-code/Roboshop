@@ -64,7 +64,7 @@ validate $? "installing dependency packages"
 
 
 
-systemctl daemon reload &>>$log
+systemctl daemon-reload &>>$log
 validate $? "Reloading user service"
 
 systemctl enable user &>>$log
