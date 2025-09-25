@@ -39,7 +39,7 @@ fi
 }
 
 end_time=$(date +%s)
-total_time=$($end_time-$start_time)
+total_time=$(($end_time-$start_time))
 echo "Total script execution time:$total_time"
 
 
