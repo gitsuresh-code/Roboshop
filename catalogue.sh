@@ -86,4 +86,4 @@ validate $? "Loading DB Schema"
 end_time=$(date +%s)
 total_time=$(($end_time-$start_time))
 
-echo -p "Script executed in $total_time"
+echo -e "$G Script executed$N  in $total_time"
