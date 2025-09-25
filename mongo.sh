@@ -30,7 +30,7 @@ validate()
     fi 
 }
 
-dnf list installed mongod &>>$log
+dnf list installed mongodb-org &>>$log
 validate $? "MogoDB Available"
 
 dnf install mongodb-org -y &>>$log
