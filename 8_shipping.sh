@@ -32,7 +32,7 @@ validate()
 }
 
 
-dnf install maven -y
+dnf install maven -y &>>$log
 validate $? "Instaling Maven"
 
 id roboshop &>>$log
@@ -66,7 +66,7 @@ validate $? "Generating Build File"
 mv target/shipping-1.0.jar shipping.jar 
 validate $? "Moving build file"
 
-cp /root/RoboShop/shipping.service /etc/systemd/system/shipping.service
+cp /root/RoboShop/shipping.service /etc/systemd/system/
 validate $? "Copying the shipping service file to systemd"
 
 systemctl daemon-reload
