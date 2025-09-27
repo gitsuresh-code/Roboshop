@@ -71,7 +71,7 @@ validate $? "installing dependency packages"
 cp /root/Roboshop/catalogue.service /etc/systemd/system/catalogue.service
 validate $? "Copying catalogue service file"
 
-systemctl daemon reload &>>$log
+systemctl daemon-reload &>>$log
 validate $? "Reloading Catalogue service"
 
 systemctl enable catalogue &>>$log
