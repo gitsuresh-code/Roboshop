@@ -57,7 +57,7 @@ validate $? "Adding App Directory"
 rm -rf /app/*
 validate $? "Deleting old files"
 
-curl -L -o /tmp/cart.zip https://roboshop-artifacts.s3.amazonaws.com/cart-v3.zip
+curl -L -o /tmp/cart.zip https://roboshop-artifacts.s3.amazonaws.com/cart-v3.zip >>$log
 validate $? "Downloading Cart Files"
 
 cd /app
