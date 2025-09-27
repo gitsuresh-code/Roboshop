@@ -66,12 +66,11 @@ validate $? "Generating Build File"
 mv target/shipping-1.0.jar shipping.jar 
 validate $? "Moving build file"
 
-
 cp /root/Roboshop/shipping.service /etc/systemd/system/shipping.service
 validate $? "Copying the shipping service file to systemd"
 
 systemctl daemon-reload
-Validate $? "Reloading Daemon"
+validate $? "Reloading Daemon"
 
 systemctl enable shipping &>>$log
 validate $? "Enabling shipping service"
