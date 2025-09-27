@@ -11,7 +11,7 @@ log=$file/$name.log
 
 mkdir -p $file
 
-
+start_time=$(date +%s)
 
 
 if [ $user -ne 0 ];then
@@ -50,7 +50,10 @@ validate $? "Updating Config file"
 systemctl restart mongod &>>$log
 validate $? "restarting service"
 
+end_time=$(date +%s)
+total_time=$(($end_time-$start_time))
 
+echo -e "$G Script executed$N  in $total_time"
         
   
 
