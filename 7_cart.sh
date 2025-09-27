@@ -60,6 +60,9 @@ validate $? "Downloading Cart Files"
 cd /app
 validate $? "Switching to App Directory"
 
+rm -rf /app/*
+validate $? "Deleting old files"
+
 unzip /tmp/cart.zip &>>$log
 validate $? "Unzipping to App Directory"
 
@@ -70,7 +73,7 @@ validate $? "Installing Dependency Files"
 cp /root/Roboshop/cart.service /etc/systemd/system/cart.service
 validate $? "Copying the Cart service file"
 
-sytemctl daemon-reload &>>$log
+systemctl daemon-reload &>>$log
 validate $? "Reloading Daemon File"
 
 systemctl enable nodejs -y &>>$log
