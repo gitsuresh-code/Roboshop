@@ -76,10 +76,10 @@ validate $? "Copying the Cart service file"
 systemctl daemon-reload &>>$log
 validate $? "Reloading Daemon File"
 
-systemctl enable cart -y &>>$log
+systemctl enable cart &>>$log
 validate $? "Cart Enabling"
 
-systemctl start cart -y &>>$log
+systemctl start cart &>>$log
 validate $? "Cart starting"
 
 
