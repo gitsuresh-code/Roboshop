@@ -76,11 +76,11 @@ validate $? "Copying the Cart service file"
 systemctl daemon-reload &>>$log
 validate $? "Reloading Daemon File"
 
-systemctl enable nodejs -y &>>$log
-validate $? "Nodejs Enabling"
+systemctl enable cart -y &>>$log
+validate $? "Cart Enabling"
 
-systemctl start nodejs -y &>>$log
-validate $? "Nodejs starting"
+systemctl start cart -y &>>$log
+validate $? "Cart starting"
 
 
 
