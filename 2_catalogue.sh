@@ -52,6 +52,8 @@ fi
 mkdir -p /app &>>$log
 validate $? "Creating App directory"
 
+rm -rf /app/*
+validate $? "Deleting old files"
 
 curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip &>>$log
 validate $? "Dowloading backend files"
