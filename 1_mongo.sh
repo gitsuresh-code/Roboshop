@@ -33,7 +33,7 @@ validate()
 dnf list installed mongodb-org &>>$log
 validate $? "MogoDB Available"
 
-cp ./mongo.repo /etc/yum.repos.d/mongo.repo
+cp /root/Roboshop/mongo.repo /etc/yum.repos.d/mongo.repo
 
 dnf install mongodb-org -y &>>$log
 validate $? "MongoDB installation"
