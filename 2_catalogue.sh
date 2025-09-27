@@ -69,7 +69,7 @@ npm install &>>$log
 validate $? "installing dependency packages"
 
 cp /root/Roboshop/catalogue.service /etc/systemd/system/catalogue.service
-cp /root/Roboshop/mongo.repo /etc/yum.repos.d/mongo.repo
+validate $? "Copying catalogue service file"
 
 systemctl daemon reload &>>$log
 validate $? "Reloading Catalogue service"
@@ -80,6 +80,8 @@ validate $? "Enabling Catalogue service"
 
 systemctl start catalogue &>>$log
 validate $? "Starting Catalogue service"
+
+cp /root/Roboshop/mongo.repo /etc/yum.repos.d/mongo.repo
 
 
 dnf install mongodb-mongosh -y &>>$log 
