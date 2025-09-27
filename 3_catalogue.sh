@@ -13,8 +13,7 @@ echo -e "Script $G started executing $N now: $date"
 start_time=$(date +%s)
 mkdir -p $file
 
-cp ./catalogue.service /etc/systemd/system/
-cp ./mongo.repo /etc/yum.repos.d/mongo.repo
+
 
 if [ $user -ne 0 ];then
     {
@@ -41,11 +40,16 @@ validate $? "Enabling nodejs 20 version"
 dnf install nodejs -y &>>$log
 validate $? "Installing nodejs"
 
+id roboshop
+if [ $? -ne 0 ]; then
 useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$log
 validate $? "Adding Application user"
+else
+    echo "User is already exist"
+fi
 
 
-mkdir /app &>>$log
+mkdir -p /app &>>$log
 validate $? "Creating App directory"
 
 
@@ -62,7 +66,8 @@ validate $? "Unzipping the app files"
 npm install &>>$log
 validate $? "installing dependency packages"
 
-
+cp ./catalogue.service /etc/systemd/system/
+cp ./mongo.repo /etc/yum.repos.d/mongo.repo
 
 systemctl daemon reload &>>$log
 validate $? "Reloading Catalogue service"
@@ -73,7 +78,6 @@ validate $? "Enabling Catalogue service"
 
 systemctl start catalogue &>>$log
 validate $? "Starting Catalogue service"
-
 
 
 dnf install mongodb-mongosh -y
