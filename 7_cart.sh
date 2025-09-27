@@ -1,5 +1,4 @@
 #!/bin/bash
-#!/bin/bash
 
 R="\e[31m"
 G="\e[32m"
@@ -16,10 +15,9 @@ mkdir -p $file
 
 
 if [ $user -ne 0 ]; then
-    {
         echo -e "$R Please take root permission $N" | tee -a $log
         exit 1
-    }         
+             
 fi
 
 validate()
