@@ -68,8 +68,8 @@ validate $? "Unzipping the app files"
 npm install &>>$log
 validate $? "installing dependency packages"
 
-cp ./catalogue.service /etc/systemd/system/catalogue.service
-cp ./mongo.repo /etc/yum.repos.d/mongo.repo
+cp /root/Roboshop/catalogue.service /etc/systemd/system/catalogue.service
+cp /root/Roboshop/mongo.repo /etc/yum.repos.d/mongo.repo
 
 systemctl daemon reload &>>$log
 validate $? "Reloading Catalogue service"
