@@ -1,0 +1,55 @@
+#!/bin/bash
+
+R="\e[31m"
+G="\e[32m"
+Y="\e[32m"
+N="\e[0m"
+user=$(id -u)
+file="/var/log/roboshoplog/"
+name=$(echo $0 | cut -d "." -f1)
+log=$file/$name.log
+
+echo -e "Script $G started executing $N now: $date"
+start_time=$(date +%s)
+mkdir -p $file
+
+
+if [ $user -ne 0 ]; then
+        echo -e "$R Please take root permission $N" | tee -a $log
+        exit 1
+      
+fi
+
+validate()
+{
+    if [ $? -ne 0 ]; then
+        echo -e "$2 $R is FAILURE $N" | tee -a $log 
+        else
+        echo -e "$2 $G is SUCCESS $N" | tee -a $log
+    fi 
+}
+
+cp /root/Roboshop/rabbitmq.repo /etc/yum.repos.d/rabbitmq.repo
+validate $? "Copying RabbitMQ repo file"
+
+
+dnf install rabbitmq-server -y &>>$log
+validate $? "Installing RabbitMQ"
+
+systemctl enable rabbitmq-server &>>$log
+validate $? "Enabling RabbitMQ"
+
+systemctl start rabbitmq-server &>>$log
+validate $? "Enabling RabbitMQ"
+
+id roboshop &>>$log
+if [ $? -ne 0 ]; then
+        rabbitmqctl add_user roboshop roboshop123
+        validate $? "Adding Roboshop user"
+    else 
+        echo "user already exist..$Y skipping $N" | tee -a $log
+fi
+
+rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
+validate $? "Granting permission to roboshop user"
+
