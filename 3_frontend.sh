@@ -10,6 +10,7 @@ name=$(echo $0 | cut -d "." -f1)
 log=$file/$name.log
 
 echo -e "Script $G started executing $N now: $date"
+
 start_time=$(date +%s)
 mkdir -p $file
 
@@ -57,8 +58,6 @@ validate $? "Downloading front files to temp"
 
 unzip /tmp/frontend.zip &>>$log
 validate $? "Unzipping files to NGINX directory"
-
-touch /etc/nginx/nginx.conf
 
 cp /root/Roboshop/nginx.conf /etc/nginx/nginx.conf &>>$log
 validate $? "Updating nginx config file"

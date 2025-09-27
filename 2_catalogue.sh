@@ -82,7 +82,7 @@ systemctl start catalogue &>>$log
 validate $? "Starting Catalogue service"
 
 
-dnf install mongodb-mongosh -y
+dnf install mongodb-mongosh -y &>>$log 
 validate $? "Installing mongo client"
 
 
