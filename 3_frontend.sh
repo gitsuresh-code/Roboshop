@@ -54,7 +54,7 @@ rm -rf * &>>$log
 validate $? "Delete default NGINX files"
 
 curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip &>>$log
-validate $? "Downloading front files to temp"
+validate $? "Downloading front files to temp"   
 
 unzip /tmp/frontend.zip &>>$log
 validate $? "Unzipping files to NGINX directory"
