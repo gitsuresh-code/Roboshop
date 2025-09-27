@@ -17,10 +17,9 @@ mkdir -p $file
 
 
 if [ $user -ne 0 ]; then
-    {
-        echo -e "$R Please take root permission $N" | tee -a $log
+         echo -e "$R Please take root permission $N" | tee -a $log
         exit 1
-    }         
+          
 fi
 
 validate()
@@ -43,15 +42,15 @@ validate $? "Installing nodejs"
 
 id roboshop &>>$log
 if [ $? -ne 0 ]; then
-useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$log
-validate $? "Adding Application user"
+    useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$log
+    validate $? "Adding Application user"
 else
     echo "User already exist"
 
 fi
 
 
-mkdir /app &>>$log
+mkdir -p /app &>>$log
 validate $? "Creating App directory"
 
 rm -rf /app/*
@@ -71,8 +70,9 @@ npm install &>>$log
 validate $? "installing dependency packages"
 
 cp /root/Roboshop/user.service /etc/systemd/system/user.service
+validate $? "Copying the user service file to systemd"
 
-systemctl daemon-reload &>>$log
+systemctl daemon-reload 
 validate $? "Reloading user service"
 
 systemctl enable user &>>$log
