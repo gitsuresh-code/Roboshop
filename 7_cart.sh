@@ -70,7 +70,7 @@ validate $? "Unzipping to App Directory"
 npm install &>>$log
 validate $? "Installing Dependency Files"
 
-cp /root/Roboshop/cart.service /etc/systemd/system/cart.service
+cp /root/Roboshop/cart.service /etc/systemd/system/cart.service &>>$log
 validate $? "Copying the Cart service file"
 
 systemctl daemon-reload &>>$log
