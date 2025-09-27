@@ -11,7 +11,7 @@ log=$file/$name.log
 
 mkdir -p $file
 
-cp ./mongo.repo /etc/yum.repos.d/mongo.repo
+
 
 
 if [ $user -ne 0 ];then
@@ -32,6 +32,8 @@ validate()
 
 dnf list installed mongodb-org &>>$log
 validate $? "MogoDB Available"
+
+cp ./mongo.repo /etc/yum.repos.d/mongo.repo
 
 dnf install mongodb-org -y &>>$log
 validate $? "MongoDB installation"
