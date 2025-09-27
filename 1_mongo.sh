@@ -22,13 +22,13 @@ if [ $user -ne 0 ]; then
 fi
 
 validate()
-{
-    if [ $? -ne 0 ]; then
-        echo -e "$2 $R is FAILURE $N"
-        else
-        echo -e "$2 $G is SUCCESS $N"
-    fi 
-}
+    {
+         if [ $? -ne 0 ]; then
+            echo -e "$2 $R is FAILURE $N"
+            else
+            echo -e "$2 $G is SUCCESS $N"
+        fi 
+    }
 
 dnf list installed mongodb-org &>>$log
 validate $? "MogoDB Available"
@@ -56,7 +56,7 @@ total_time=$(($end_time-$start_time))
 echo -e "$G Script executed$N  in $total_time"
         
   
-    
+
 
 
 
