@@ -14,7 +14,7 @@ mkdir -p $file
 start_time=$(date +%s)
 
 
-if [ $user -ne 0 ];then
+if [ $user -ne 0 ]; then
     {
         echo -e "$R Please take root permission $N" | tee -a $log
         exit 1
@@ -23,7 +23,7 @@ fi
 
 validate()
 {
-    if [ $? -ne 0 ];then
+    if [ $? -ne 0 ]; then
         echo -e "$2 $R is FAILURE $N"
         else
         echo -e "$2 $G is SUCCESS $N"
@@ -56,7 +56,7 @@ total_time=$(($end_time-$start_time))
 echo -e "$G Script executed$N  in $total_time"
         
   
-
+    
 
 
 
