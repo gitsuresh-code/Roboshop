@@ -54,14 +54,14 @@ fi
 mkdir -p /app 
 validate $? "Adding App Directory"
 
+rm -rf /app/*
+validate $? "Deleting old files"
+
 curl -L -o /tmp/cart.zip https://roboshop-artifacts.s3.amazonaws.com/cart-v3.zip
 validate $? "Downloading Cart Files"
 
 cd /app
 validate $? "Switching to App Directory"
-
-rm -rf /app/*
-validate $? "Deleting old files"
 
 unzip /tmp/cart.zip &>>$log
 validate $? "Unzipping to App Directory"
