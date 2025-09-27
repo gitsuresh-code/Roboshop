@@ -13,10 +13,10 @@ mkdir -p $file
 
 
 if [ $user -ne 0 ]; then
-    {
-        echo -e "$R Please take root permission $N" | tee -a $log
-        exit 1
-    }         
+    
+    echo -e "$R Please take root permission $N" | tee -a $log
+    exit 1
+             
 fi
 
 validate()
@@ -40,10 +40,6 @@ validate $? "enabling version"
 dnf install redis -y &>>$log
 validate $? "Redis Available"
 
-systemctl start redis &>>$log
-validate $? "Starting service"
-
-
 # sed -i -e 's/127.0.0.1/0.0.0.0 -e /protected-mode/c protected-mode no'/etc/redis/redis.conf &>>$log
 sed -i 's/127.0.0.1/0.0.0.0/' /etc/redis/redis.conf &>>$log
 validate $? "Redis Enabling Public Access"
@@ -54,8 +50,8 @@ validate $? "Protected Mode off"
 systemctl enable redis &>>$log
 validate $? "Redis Enabling"
 
-systemctl restart redis &>>$log
-validate $? "restarting service"
+systemctl start redis &>>$log
+validate $? "start service"
 
 
 
