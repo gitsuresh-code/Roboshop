@@ -66,7 +66,8 @@ validate $? "Generating Build File"
 mv target/shipping-1.0.jar shipping.jar 
 validate $? "Moving build file"
 
-cp ./shipping.service /etc/systemd/system/
+rm -rf 
+cp ./shipping.service /etc/systemd/system/shipping.service
 validate $? "Copying the shipping service file to systemd"
 
 systemctl daemon-reload
