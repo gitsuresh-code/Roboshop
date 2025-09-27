@@ -13,7 +13,7 @@ echo -e "Script $G started executing $N now: $date"
 start_time=$(date +%s)
 mkdir -p $file
 
-cp ./user.service /etc/systemd/system/
+
 
 
 if [ $user -ne 0 ];then
@@ -41,18 +41,26 @@ validate $? "Enabling nodejs 20 version"
 dnf install nodejs -y &>>$log
 validate $? "Installing nodejs"
 
+id roboshop
+if [ $? -ne 0]; then
 useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$log
 validate $? "Adding Application user"
+else
+    echo "User already exist"
+
+fi
 
 
 mkdir /app &>>$log
 validate $? "Creating App directory"
 
+rm -rf /app/*
+validate $? "Creating App directory"
 
 curl -o /tmp/user.zip https://roboshop-artifacts.s3.amazonaws.com/user-v3.zip &>>$log
 validate $? "Dowloading backend files"
 
-cd /app
+cd /app &>>$log
 validate $? "Switching to app directory"
 
 unzip /tmp/user.zip &>>$log
@@ -62,7 +70,7 @@ validate $? "Unzipping the app files"
 npm install &>>$log
 validate $? "installing dependency packages"
 
-
+cp /root/Roboshop/user.service /etc/systemd/system/user.service
 
 systemctl daemon-reload &>>$log
 validate $? "Reloading user service"
